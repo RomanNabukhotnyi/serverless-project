@@ -1,17 +1,18 @@
 import type { AWS } from '@serverless/typescript';
+
 import hello from './src/functions/hello';
-import func1 from './src/functions/func1';
-import func2 from './src/functions/func2';
-import func3 from './src/functions/func3';
-import func4 from './src/functions/func4';
-import func5 from './src/functions/func5';
+import findTheFirstPositiveElement from './src/functions/findTheFirstPositiveElement';
+import findSumOfPositiveElements from './src/functions/findSumOfPositiveElements';
+import findTheSumAndProductOfTheFirstNElements from './src/functions/findTheSumAndProductOfTheFirstNElements';
+import findTodaysDateIndex from './src/functions/findTodaysDateIndex';
+import sortByNameAndDate from './src/functions/sortByNameAndDate';
 
 const serverlessConfiguration: AWS = {
     service: 'serverless-project',
     frameworkVersion: '3',
     plugins: [
         'serverless-esbuild',
-        'serverless-webpack'
+        'serverless-webpack',
     ],
     provider: {
         name: 'aws',
@@ -26,7 +27,14 @@ const serverlessConfiguration: AWS = {
         },
     },
     // import the function via paths
-    functions: { hello, func1, func2, func3, func4, func5 },
+    functions: { 
+        hello, 
+        findTheFirstPositiveElement, 
+        findSumOfPositiveElements, 
+        findTheSumAndProductOfTheFirstNElements, 
+        findTodaysDateIndex, 
+        sortByNameAndDate, 
+    },
     package: { individually: true },
     custom: {
         esbuild: {
@@ -40,10 +48,10 @@ const serverlessConfiguration: AWS = {
             concurrency: 10,
         },
         webpack: {
-            webpackConfig: 'webpack.config.js',
+            webpackConfig: 'webpack.config.ts',
             includeModules: true,
-            packager: 'npm'
-        }
+            packager: 'npm',
+        },
     },
 };
 

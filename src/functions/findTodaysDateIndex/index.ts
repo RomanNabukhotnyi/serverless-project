@@ -5,8 +5,8 @@ export default {
     events: [
         {
             http: {
-                method: 'post',
-                path: 'func3',
+                method: 'get',
+                path: 'findTodaysDateIndex',
             },
         },
     ],

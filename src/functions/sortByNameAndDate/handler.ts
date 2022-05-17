@@ -1,8 +1,11 @@
 import { formatJSONResponse } from '../../libs/api-gateway';
 import { middyfy } from '../../libs/lambda';
+import { handlerWrapper } from '../../libs/handler-wrapper';
 
-const func5 = async (event: { body: { array: { firstName: string, birthDate: string }[]; }; }) => {
-    const array = event.body.array;
+import schema from './schema';
+
+const sortByNameAndDate = async (body: { array: { firstName: string, birthDate: string }[]; }) => {
+    const array = body.array;
     const sortedByName = [...array.sort((a, b) => a.firstName.localeCompare(b.firstName))];
     const sortedByDate = [...array.sort((x, y) => (Number(new Date(y.birthDate)) - Number(new Date(x.birthDate))))];
     return formatJSONResponse({
@@ -11,4 +14,4 @@ const func5 = async (event: { body: { array: { firstName: string, birthDate: str
     });
 };
 
-export const main = middyfy(func5);
+export const main = middyfy(handlerWrapper(schema, sortByNameAndDate));

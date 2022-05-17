@@ -5,8 +5,8 @@ export default {
     events: [
         {
             http: {
-                method: 'get',
-                path: 'func4',
+                method: 'post',
+                path: 'findTheSumAndProductOfTheFirstNElements',
             },
         },
     ],

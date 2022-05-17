@@ -6,7 +6,7 @@ export default {
         {
             http: {
                 method: 'post',
-                path: 'func2',
+                path: 'findFirstPositiveElement',
             },
         },
     ],

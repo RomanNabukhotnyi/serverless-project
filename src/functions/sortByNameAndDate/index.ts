@@ -6,7 +6,7 @@ export default {
         {
             http: {
                 method: 'post',
-                path: 'func5',
+                path: 'sortByNameAndDate',
             },
         },
     ],
