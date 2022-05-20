@@ -1,4 +1,3 @@
-import { formatJSONResponse } from '../../libs/api-gateway';
 import { middyfy } from '../../libs/lambda';
 
 const findTodaysDateIndex = async () => {
@@ -8,9 +7,9 @@ const findTodaysDateIndex = async () => {
     const day = date.getDate();
     const beginYear = new Date(year, 0);
     const index = (Number(new Date(year, month, day)) - Number(beginYear)) / 1000 / 60 / 60 / 24;
-    return formatJSONResponse({
+    return {
         index,
-    });
+    };
 };
 
-export const main = middyfy(findTodaysDateIndex);
+export const main = middyfy(findTodaysDateIndex, {});

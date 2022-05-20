@@ -1,9 +1,18 @@
-import Joi from 'joi';
-
-export default Joi.object({
-    array: Joi.array().items({
-        firstName: Joi.string().required(),
-        lastName: Joi.string(),
-        birthDate: Joi.string().required(),
-    }).min(1).required(),
-});
+export default {
+    type: 'object',
+    properties: {
+        array: { 
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    firstName: { type: 'string' },
+                    lastName: { type: 'string' },
+                    birthDate: { type: 'string' },
+                },
+                required: ['firstName', 'birthDate'],
+            },
+        },
+    },
+    required: ['array'],
+} as const;

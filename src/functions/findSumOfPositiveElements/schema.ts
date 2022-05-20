@@ -1,5 +1,12 @@
-import Joi from 'joi';
-
-export default Joi.object({
-    array: Joi.array().min(1).required(),
-});
+export default {
+    type: 'object',
+    properties: {
+        array: { 
+            type: 'array',
+            items: {
+                type: 'number',
+            },
+        },
+    },
+    required: ['array'],
+} as const;

@@ -1,16 +1,16 @@
-import { formatJSONResponse } from '../../libs/api-gateway';
+import type { ValidatedEventAPIGatewayProxyEvent } from '../../libs/api-gateway';
 import { middyfy } from '../../libs/lambda';
-import { handlerWrapper } from '../../libs/handler-wrapper';
 
 import schema from './schema';
 
-const findFirstPositiveElement = async (body: { array: number[]; }) => {
-    const index = body.array.findIndex((element) => element > 0);
-    const value = body.array[index];
-    return formatJSONResponse({
+const findFirstPositiveElement: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
+    const array = event.body.array;
+    const index = array.findIndex((element) => element > 0);
+    const value = array[index];
+    return {
         index,
         value,
-    });
+    };
 };
 
-export const main = middyfy(handlerWrapper(schema, findFirstPositiveElement));
+export const main = middyfy(findFirstPositiveElement, schema);

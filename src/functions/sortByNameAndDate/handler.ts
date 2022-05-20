@@ -1,17 +1,16 @@
-import { formatJSONResponse } from '../../libs/api-gateway';
+import type { ValidatedEventAPIGatewayProxyEvent } from '../../libs/api-gateway';
 import { middyfy } from '../../libs/lambda';
-import { handlerWrapper } from '../../libs/handler-wrapper';
 
 import schema from './schema';
 
-const sortByNameAndDate = async (body: { array: { firstName: string, birthDate: string }[]; }) => {
-    const array = body.array;
+const sortByNameAndDate: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
+    const array = event.body.array;
     const sortedByName = [...array.sort((a, b) => a.firstName.localeCompare(b.firstName))];
     const sortedByDate = [...array.sort((x, y) => (Number(new Date(y.birthDate)) - Number(new Date(x.birthDate))))];
-    return formatJSONResponse({
+    return {
         sortedByName,
         sortedByDate,
-    });
+    };
 };
 
-export const main = middyfy(handlerWrapper(schema, sortByNameAndDate));
+export const main = middyfy(sortByNameAndDate, schema);

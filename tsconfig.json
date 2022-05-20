@@ -10,6 +10,7 @@
     "sourceMap": true,
     "target": "ES2022",
     "outDir": "lib",
+    "baseUrl": "."
   },
   "include": ["src/**/*.ts", "serverless.ts", "webpack.config.ts"],
   "exclude": [

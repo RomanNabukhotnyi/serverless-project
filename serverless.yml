@@ -1,0 +1,61 @@
+service: serverless-project
+frameworkVersion: '3'
+plugins:
+    - serverless-webpack
+provider:
+    name: aws
+    runtime: nodejs14.x
+    apiGateway:
+        minimumCompressionSize: 1024
+        shouldStartNameWithService: true
+
+    environment:
+        AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+        NODE_OPTIONS: --enable-source-maps --stack-trace-limit=1000
+
+functions: 
+    hello: 
+        handler: src/functions/hello/handler.main
+        events:
+            - http:
+                path: /hello
+                method: post
+    findTheFirstPositiveElement:
+        handler: src/functions/findTheFirstPositiveElement/handler.main
+        events:
+            - http:
+                path: /findTheFirstPositiveElement
+                method: post
+    findSumOfPositiveElements:
+        handler: src/functions/findSumOfPositiveElements/handler.main
+        events:
+            - http:
+                path: /findSumOfPositiveElements
+                method: post
+    findTheSumAndProductOfTheFirstNElements:
+        handler: src/functions/findTheSumAndProductOfTheFirstNElements/handler.main
+        events:
+            - http:
+                path: /findTheSumAndProductOfTheFirstNElements
+                method: post
+    findTodaysDateIndex:
+        handler: src/functions/findTodaysDateIndex/handler.main
+        events:
+            - http:
+                path: /findTodaysDateIndex
+                method: get
+    sortByNameAndDate:
+        handler: src/functions/sortByNameAndDate/handler.main
+        events:
+            - http:
+                path: /sortByNameAndDate
+                method: post
+
+package: 
+    individually: true
+custom:
+    webpack:
+        webpackConfig: webpack.config.ts
+        includeModules: true
+        packager: npm
+

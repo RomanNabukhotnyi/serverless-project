@@ -1,15 +1,14 @@
-import { formatJSONResponse } from '../../libs/api-gateway';
+import type { ValidatedEventAPIGatewayProxyEvent } from '../../libs/api-gateway';
 import { middyfy } from '../../libs/lambda';
-import { handlerWrapper } from '../../libs/handler-wrapper';
 
 import schema from './schema';
 
-const findSumOfPositiveElements = async (body: { array: number[]; }) => {
-    const array = body.array;
+const findSumOfPositiveElements: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
+    const array = event.body.array;
     const sum = array.reduce((res, elem) => elem > 0 ? res + elem : res, 0);
-    return formatJSONResponse({
+    return {
         sum,
-    });
+    };
 };
 
-export const main = middyfy(handlerWrapper(schema, findSumOfPositiveElements));
+export const main = middyfy(findSumOfPositiveElements, schema);
