@@ -12,4 +12,4 @@ const findTodaysDateIndex = async () => {
     };
 };
 
-export const main = middyfy(findTodaysDateIndex, {});
+export const main = middyfy(findTodaysDateIndex, { type: 'any' });
