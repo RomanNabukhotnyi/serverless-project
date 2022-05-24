@@ -4,8 +4,7 @@ import { middyfy } from '../../libs/lambda';
 import schema from './schema';
 
 const findTheSumAndProductOfTheFirstNElements: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
-    const array = event.body.array;
-    const n = event.body.n;
+    const { array, n } = event.body;
     const sum = array.slice(0, n).reduce((res, elem) => res + elem, 0);
     const prod = array.slice(0, n).reduce((res, elem) => res * elem, 1);
     return {

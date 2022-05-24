@@ -4,7 +4,7 @@ import { middyfy } from '../../libs/lambda';
 import schema from './schema';
 
 const findFirstPositiveElement: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
-    const array = event.body.array;
+    const { array } = event.body;
     const index = array.findIndex((element) => element > 0);
     const value = array[index];
     return {

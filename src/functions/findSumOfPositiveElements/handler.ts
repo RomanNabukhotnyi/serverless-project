@@ -4,7 +4,7 @@ import { middyfy } from '../../libs/lambda';
 import schema from './schema';
 
 const findSumOfPositiveElements: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
-    const array = event.body.array;
+    const { array } = event.body;
     const sum = array.reduce((res, elem) => elem > 0 ? res + elem : res, 0);
     return {
         sum,
